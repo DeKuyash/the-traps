@@ -17,60 +17,27 @@ local centerX = ScrW() / 2
 local centerY = ScrH() / 2
 
 
-
-net.Receive('startProgressBar', function()
+net.Receive('startProgressbar', function()
     local seconds = net.ReadInt(5)
-    local progress = (0.1/(8*seconds))
+    local needToFill = seconds * 34
+    local progress = 1
     
-    hook.Add('HUDPaint', 'drawProgressBar', function()
+    hook.Add('Tick', 'count.Progressbar', function()
+        progress = progress + 1
+
+    end)
+
+    hook.Add('HUDPaint', 'draw.Progressbar', function()
         draw.RoundedBox(5, centerX + 100, centerY, 200, 20, Color(255, 255, 255, 240)) -- рамка прогрессбара
 
-        draw.RoundedBox(5, centerX + 100, centerY, math.Clamp(200*progress, 0, 200), 20, Color(0, 195, 255)) -- прогрессбар
+        draw.RoundedBox(5, centerX + 100, centerY, math.Clamp(200*(progress/needToFill), 0, 200), 20, Color(0, 195, 255)) -- прогрессбар
 
         draw.SimpleTextOutlined('Взводим ловушку...', 'trapFont', centerX + 100, centerY - 30, Color(255, 255, 255), TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP, 1, Color(0, 0, 0))
 
-        progress = progress + (0.1/(8*seconds))
     end)
 
     timer.Simple(seconds, function()
-        hook.Remove('HUDPaint', 'drawProgressBar')
+        hook.Remove('Tick', 'count.Progressbar')
+        hook.Remove('HUDPaint', 'draw.Progressbar')
     end)
-
-
 end)
-
-
-
-
-
-
-
-
-
-
-
---[[
-net.Receive('delayProgressBar', function()
-    local key = net.ReadBool()
-    local progress = 0
-
-    if key then
-        hook.Add('HUDPaint', 'delayProgressBar', function()
-            draw.RoundedBox(5, centerX + 100, centerY, 200, 20, Color(255, 255, 255, 240)) -- рамка прогрессбара
-
-            draw.RoundedBox(5, centerX + 100, centerY, math.Clamp(progress, 0, 200), 20, Color(0, 195, 255)) -- прогрессбар
-
-            draw.SimpleTextOutlined('Взводим ловушку...', 'trapFont', centerX + 100, centerY - 30, Color(255, 255, 255), TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP, 1, Color(0, 0, 0))
-
-            progress = progress + 2
-
-        end)
-
-    else
-        hook.Remove('HUDPaint','delayProgressBar')
-
-    end
-end)
-
-
-]]
