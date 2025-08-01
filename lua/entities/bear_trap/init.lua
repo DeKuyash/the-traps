@@ -79,11 +79,7 @@ function ENT:Touch(ent)
             self:SetModel('models/trap/trap_close.mdl')
             self:EmitSound('btrap_catch')
 
-            ent:SetHealth(ent:Health() - 35)
-
-            if ent:Health() <= 0 then
-                ent:SetHealth(1)
-            end
+            ent:TakeDamage(35)
 
             ent:Freeze(true)
             ent:EmitSound('vo/npc/male01/pain0' .. math.random(1, 9) .. '.wav') -- не стал делать на female

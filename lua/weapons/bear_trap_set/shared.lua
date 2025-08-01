@@ -14,7 +14,7 @@ if CLIENT then
     SWEP.DrawCrosshair = false;
 end
 
-SWEP.Purpose = 'Кусь за ногу'
+SWEP.Purpose = 'Цапнуть за ножку'
 SWEP.Instructions = 'ЛКМ — Установить'
 SWEP.Author = 'Kuyash'
 

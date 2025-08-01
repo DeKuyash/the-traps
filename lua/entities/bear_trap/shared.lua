@@ -4,10 +4,10 @@
 ENT.Base = 'base_gmodentity'
 ENT.Type = 'anim'
 
-ENT.PrintName = 'Bear Trap'
+ENT.PrintName = 'Медвежий капкан'
 
-ENT.Category = 'The traps'
-ENT.Purpose = 'Catch by leg'
+ENT.Category = 'Ловушки'
+ENT.Purpose = 'Цапнуть за ножку'
 
 ENT.Author = 'Kuyash'
 
